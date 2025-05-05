@@ -1,4 +1,4 @@
-import com.youlai.lrucache.LruCache;
+import com.youlai.lrucache.LRUCache;
 import org.junit.Test;
 
 public class TestLruCache {
@@ -11,17 +11,16 @@ public class TestLruCache {
      */
     @Test
     public void testLruCache() {
-        LruCache lruCache = new LruCache(2);
+        LRUCache lruCache = new LRUCache(2);
         System.out.println("null");
         lruCache.put(1, 1); // 缓存是 {1=1}
         System.out.println("null");
-        lruCache.put(2, 2); // 缓存是 {1=1, 2=2}
-        System.out.println("null");
+        lruCache.put(2, 2); // 缓存是 {2=2, 1=1}
         System.out.println(lruCache.get(1));    // 返回 1
-        lruCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 {1=1, 3=3}
+        lruCache.put(3, 3); // 去除关键字 2，缓存是 {3=3, 1=1}
         System.out.println("null");
         System.out.println(lruCache.get(2));    // 返回 -1 (未找到)
-        lruCache.put(4, 4); // 该操作会使得关键字 1 作废，缓存是 {4=4, 3=3}
+        lruCache.put(4, 4); // 去除关键字 1，缓存是 {4=4, 3=3}
         System.out.println("null");
         System.out.println(lruCache.get(1));    // 返回 -1 (未找到)
         System.out.println(lruCache.get(3));    // 返回 3
